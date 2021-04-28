@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+{% include "navbar2.html" %}
+
+
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+
+        <div class="row wow fadeIn">
+
+          {% for shirts in object_list %}
+          <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="card">
+
+              <div class="view overlay">
+                {% comment %} <img src="{{ shirts.image.url }" class="card-img-top" {% endcomment %}
+                <img src="{{ shirts.image.url }}" class="card-img-top">
+                <a href="{{ shirts.get_absolute_url }}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <div class="card-body text-center">
+                <a href="" class="grey-text">
+                  <h5>{{ shirts.get_category_display }}</h5>
+                </a>
+                <h5>
+                  <strong>
+                    <a href="{{ shirts.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
+                      <span class="badge badge-pill {{ shirts.get_label_display }}-color">NEW</span>
+                    </a>
+                  </strong>
+                </h5>
+
+                <h4 class="font-weight-bold blue-text">
+                  <strong>$
+                  {% if shirts.discount_price %}
+                  {{ shirts.discount_price }}
+                  {% else %}
+                  {{ shirts.price }}
+                  {% endif %}
+                  </strong>
+                </h4>
+
+              </div>
+
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+
+      </section>
+
+{% endblock content %}
